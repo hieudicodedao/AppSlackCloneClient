@@ -1,0 +1,294 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+*::-webkit-scrollbar {
+	width: 0.3em;
+}
+
+*::-webkit-scrollbar-track {
+	box-shadow: inset 0 0 0.1em rgba(255, 255, 255, 0.3);
+}
+
+*::-webkit-scrollbar-thumb {
+	background-color: rgb(129, 122, 122);
+	outline: 2px solid rgb(226, 230, 233);
+}
+.nav-bar {
+	height: 5%;
+	background-color: #350d36;
+}
+.chanel-content {
+	display: flex;
+	height: 95%;
+}
+.main {
+	height: 100vh;
+	width: 100vw;
+	overflow: visible;
+}
+
+.main .chanel {
+	width: 20%;
+	color: #3f0e40;
+	background-color: #3f0e40;
+}
+.main .chanel .chanel-add {
+	display: flex;
+	border-top: 1px solid #443a3a;
+	padding: 15px;
+	border-bottom: 1px solid #443a3a;
+	height: 64px;
+	color: white;
+}
+.main .chanel .chanel-add:hover {
+	background-color: #350d36;
+	cursor: pointer;
+}
+.main .chanel .chanel-add span {
+	display: block;
+	width: 90%;
+	font-size: 17px;
+	font-weight: 900;
+	color: white;
+}
+.main .chanel .chanel-add i {
+	display: block;
+	/* margin-left: 62%; */
+	cursor: pointer;
+	font-size: 24px;
+}
+
+.main .chanel .chanel-name-list {
+	height: 500px;
+	overflow-y: scroll;
+}
+.main .chanel .chanel-name-list .chanel-item {
+	color: #cdb6b6;
+	margin-top: 20px;
+	cursor: pointer;
+	display: block;
+	padding: 4px;
+}
+.main .chanel .chanel-name-list .chanel-item span {
+	margin-left: 12%;
+}
+.main .chanel .chanel-name-list .chanel-item span.chanel-name {
+	margin-left: 4%;
+}
+.main .chanel .chanel-name-list .chanel-item a.chanel-name {
+	display: inline-block;
+	text-decoration: none;
+	padding: 6px;
+	padding-left: 10px;
+}
+.main .chanel .chanel-name-list .chanel-item:hover {
+	color: white;
+}
+
+.main .chanel .chanel-name-list .chanel-item.active {
+	color: white;
+	background-color: #1164a3;
+}
+/* .main .chanel .chanel-name-list .chanel-item:focus {
+	color: white;
+	background-color: #1164a3;
+} */
+.main .content {
+	width: 80%;
+}
+
+.main .content .up {
+	height: 64px;
+	color: black;
+	border-bottom: 1px solid #e1d2d2;
+}
+.main .content .up .name-group {
+	height: 30px;
+}
+.main .content .up .name-group span {
+	display: inline-block;
+	font-weight: bolder;
+	font-size: 19px;
+	margin-left: 20px;
+	margin-top: 8px;
+	font-family: system-ui;
+}
+.main .content .up .group-status span {
+	font-size: 12px;
+	margin-left: 20px;
+	color: gray;
+}
+.main .content .up .group-status a {
+	text-decoration: none;
+	display: inline-block;
+	margin-left: 30px;
+	font-size: 12px;
+	color: gray;
+	cursor: pointer;
+}
+.main .content .up .group-status a:hover {
+	color: rgb(63, 58, 58);
+}
+
+.main .content .down {
+	display: flex;
+	margin: 10px;
+	height: 88%;
+	width: auto;
+}
+.main .content .down .down-left {
+	overflow-y: scroll;
+	width: 65%;
+	height: 100%;
+	border-right: 2px solid rgb(201 189 189);
+}
+.main .content .down .down-right {
+	height: 100%;
+	width: 35%;
+}
+.main .content .down .down-right-post {
+	height: 84%;
+	width: auto;
+	overflow-y: scroll;
+}
+
+.post {
+	display: flex;
+	margin: 25px 0;
+}
+
+.post:hover {
+	cursor: pointer;
+	background-color: rgb(241, 234, 234);
+}
+
+.post .image-tab {
+	width: 70px;
+}
+.post .image-tab img {
+	margin: 0 10px;
+	width: 50px;
+	height: 42px;
+	border-radius: 4px;
+	margin-top: 8px;
+}
+
+.post .content-tab .status-content {
+	display: flex;
+	font-family: 'Roboto';
+}
+
+.post .content-tab .status-content p.user-name {
+	font-weight: 900;
+
+	font-size: 19px;
+	color: black;
+}
+.post .content-tab .status-content span.time-sent {
+	color: rgb(190, 174, 174);
+	font-size: 10px;
+	display: inline-block;
+	text-align: center;
+	margin-left: 10px;
+	padding-top: 8px;
+}
+
+.post .content-tab .user-content {
+	padding: 7px 0;
+	font-size: 14px;
+	color: #000000;
+	line-height: 1.8;
+}
+
+.post .content-tab .response {
+	display: flex;
+	margin-top: 30px;
+}
+.post .content-tab .response .last-reply {
+	color: gray;
+	font-size: 10px;
+	margin-left: 10px;
+	padding-top: 12px;
+}
+
+.main .content .down .down-right .infor-thread {
+	border-bottom: 0.1em solid rgb(241, 238, 238);
+	height: 10%;
+}
+.main .content .down .down-right .infor-thread .thread {
+	display: flex;
+}
+.main .content .down .down-right .infor-thread .thread span.header {
+	font-weight: 900;
+	display: inline-block;
+	font-size: 18px;
+	margin: 12px;
+	width: 90%;
+}
+.main .content .down .down-right .infor-thread .thread span.equal-to-i {
+	display: inline-block;
+	padding-top: 15px;
+	padding-right: 5px;
+	outline: none;
+	color: gray;
+	cursor: pointer;
+	font-size: 12px;
+	text-decoration: underline;
+}
+.main .content .down .down-right .infor-thread .thread span.equal-to-i:hover {
+	color: blue;
+}
+.main .content .down .down-right .infor-thread .thread p {
+	display: inline-block;
+	margin-left: 124px;
+	color: #a07c7c;
+	cursor: pointer;
+	font-size: 13px;
+}
+.main .content .down .down-right .infor-thread .thread i:hover {
+	cursor: pointer;
+}
+.main .content .down .down-right .infor-thread .content-dicuss span {
+	font-size: 14px;
+}
+
+.your-comment {
+	/* border-top: 1px solid rgb(235, 230, 230); */
+	display: flex;
+	height: 35px;
+	margin-bottom: 5px;
+	/* font-family: 'Montserrat', sans-serif; */
+	font-weight: 600;
+}
+.your-comment img {
+	width: auto;
+	height: 42px;
+	padding-left: 10px;
+}
+.your-comment input {
+	width: 80%;
+	outline: none;
+	border: none;
+	margin-left: 10px;
+	color: black;
+}
+
+.your-comment button {
+	width: auto;
+	background-color: white;
+	font-size: 18px;
+	padding-top: 5px;
+	padding-right: 20px;
+	border: none;
+	cursor: pointer;
+	color: rgb(31, 25, 25);
+	outline: none;
+}
+
+a.number-reply {
+	margin-left: 20px;
+	margin-top: 9px;
+	color: blue !important;
+	text-decoration: underline!importtant;
+}
