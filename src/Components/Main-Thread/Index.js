@@ -11,6 +11,7 @@ const Index = (props) => {
 		setReply_content,
 		listreply,
 		closeThread,
+		isOpenThread,
 	} = props
 	const [img, setImg] = useState('')
 	const messagesEndRef = useRef(null)
@@ -35,21 +36,27 @@ const Index = (props) => {
 		loadImage()
 	}, [])
 	return (
-		<div class='down-right'>
-			<div class='infor-thread'>
-				<div class='thread'>
-					<span class='header'>#Thread</span>
-					{/* <i class='far fa-times-circle' onClick={closeThread}></i> */}
-					<span onClick={closeThread} class = 'equal-to-i'>Close</span>
+		<div
+			className={
+				isOpenThread === false ? 'down-right' : 'down-right display'
+			}
+		>
+			<div className='infor-thread'>
+				<div className='thread'>
+					<span className='header'>#Thread</span>
+
+					<span onClick={closeThread} className='equal-to-i'>
+						Close
+					</span>
 				</div>
 			</div>
-			<div class='down-right-post'>
+			<div className='down-right-post'>
 				{listreply.map((reply) => {
 					return <SubThread reply={reply} />
 				})}
 				<div ref={messagesEndRef} />
 			</div>
-			<div class='your-comment'>
+			<div className='your-comment'>
 				<img src={URL_SERVER + '/image/' + img} alt='' />
 				<input
 					type='text'
@@ -58,8 +65,8 @@ const Index = (props) => {
 					name='reply'
 					onChange={(e) => setReply_content(e.target.value)}
 				/>
-				<button class='btn-send' onClick={handleAddReply}>
-					<i class='fas fa-plus'></i>
+				<button className='btn-send' onClick={handleAddReply}>
+					<i className='fas fa-plus'></i>
 				</button>
 			</div>
 		</div>

@@ -9,7 +9,7 @@ const Index = (props) => {
 	const { topic, handleClickTopic } = props
 	const [img, setImg] = useState('')
 	const [listReplyImg, setListReplyImg] = useState([])
-
+	console.log(topic.date)
 	const loadImage = useCallback(async () => {
 		await FETCH_POST(GET_IMAGE, { username: topic.user })
 			.then((res) => res.json())
@@ -44,7 +44,7 @@ const Index = (props) => {
 	}, [])
 
 	return (
-		<div class='post post-left' onClick={() => handleClickTopic(topic._id)}>
+		<div class='post post-left'>
 			<div class='image-tab'>
 				<img src={URL_SERVER + '/image/' + img} alt='' />
 			</div>
@@ -68,7 +68,11 @@ const Index = (props) => {
 								)
 							})}
 						</AvatarGroup>
-						<a href className='number-reply'>
+						<a
+							href
+							className='number-reply'
+							onClick={() => handleClickTopic(topic._id)}
+						>
 							{' '}
 							{topic.reply.length} replies
 						</a>
@@ -77,14 +81,22 @@ const Index = (props) => {
 								<span>No reply recored </span>
 							) : (
 								<span>
-									Last reply :{' '}
-									{showDate(listReplyImg[0].date)}
+									Last reply :{showDate(listReplyImg[0].date)}
 								</span>
 							)}
 						</div>
 					</div>
 				) : (
-					<></>
+					<div class='response'>
+						<a
+							href
+							className='number-reply'
+							onClick={() => handleClickTopic(topic._id)}
+						>
+							{' '}
+							0 replies
+						</a>
+					</div>
 				)}
 			</div>
 		</div>

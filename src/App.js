@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 function App() {
 	return (
 		<Router>
+			<Route path='/' component={Login} exact />
 			<Route component={Login} path='/login' exact />
 			<Route component={Register} path='/register' exact />
 			<Route component={WrapMain} path='/main' exact />

@@ -30,7 +30,7 @@ import {
 import { FETCH_POST, FETCH_GET } from '../../API/index'
 //
 import './index.css'
-import { lightGreen } from '@material-ui/core/colors'
+// import { lightGreen } from '@material-ui/core/colors'
 //
 let socket
 //
@@ -63,6 +63,8 @@ const Index = (props) => {
 	const [openDialogTopic, setOpenDialogTopic] = React.useState(false)
 	const [openSnack, setOpenSnack] = React.useState(false)
 	//
+	const [topic_content_2, setTopic_content_2] = useState('')
+	const [isOpenThread, setIsOpenThread] = useState(false)
 	const [idtopic, setIdtopic] = useState('')
 	const [listreply, setListreply] = useState([])
 	const [topic_content, setTopic_content] = useState('')
@@ -165,11 +167,16 @@ const Index = (props) => {
 		setChanel_name('')
 	}
 	const handleAddPost = async () => {
+		if (!current_channel) {
+			setIsAddSuccess(false)
+			setOpenSnack(true)
+			return
+		}
 		setOpenBackDrop(true)
 		await FETCH_POST(CREATE_TOPIC, {
 			user: username,
 			channel: current_channel,
-			content: topic_content,
+			content: topic_content !== '' ? topic_content : topic_content_2,
 		})
 			.then((res) => {
 				setOpenBackDrop(false)
@@ -198,7 +205,9 @@ const Index = (props) => {
 	}
 	const handleJoinChannel = async (channelName) => {
 		//if before join another topic
-
+		setIsOpenThread(false)
+		setListreply([])
+		setListtopic([])
 		if (current_channel !== '') {
 			socket.emit('leave-channel', current_channel)
 		}
@@ -255,6 +264,7 @@ const Index = (props) => {
 			.then((rs) => {
 				socket.emit('join-topic', _id_topic)
 				setIdtopic(_id_topic)
+				setIsOpenThread(true)
 				setListreply(rs.listreply)
 			})
 			.catch((error) => {
@@ -304,7 +314,10 @@ const Index = (props) => {
 				.then((res) => res.json())
 				.then((rs) => {
 					let newReply = rs.reply
-					socket.emit('update-reply-array', { newReply, _id_topic : idtopic })
+					socket.emit('update-reply-array', {
+						newReply,
+						_id_topic: idtopic,
+					})
 				})
 				.catch((error) => {
 					console.log(error)
@@ -314,7 +327,7 @@ const Index = (props) => {
 	//
 	return (
 		<div className={classes.root}>
-			<div class='main'>
+			<div className='main'>
 				<div className='nav-bar'></div>
 				<div className='chanel-content'>
 					<Channel
@@ -322,7 +335,7 @@ const Index = (props) => {
 						listchannel={listchannel}
 						handleJoinChannel={handleJoinChannel}
 					/>
-					<div class='content'>
+					<div className='content'>
 						<Status
 							numberPost={listtopic.length}
 							channelName={current_channel}
@@ -335,10 +348,14 @@ const Index = (props) => {
 								}
 							}}
 						/>
-						<div class='down'>
+						<div className='down'>
 							<Topic
 								listtopic={listtopic}
 								handleClickTopic={handleClickTopic}
+								isOpenThread={isOpenThread}
+								topic_content_2={topic_content_2}
+								setTopic_content_2={setTopic_content_2}
+								handleAddPost={handleAddPost}
 							/>
 							<Thread
 								username={username}
@@ -355,10 +372,12 @@ const Index = (props) => {
 								setReply_content={setReply_content}
 								listreply={listreply}
 								closeThread={() => {
+									setIsOpenThread(false)
 									setListreply([])
 									setIdtopic('')
 									socket.emit('leave-topic', idtopic)
 								}}
+								isOpenThread={isOpenThread}
 							/>
 						</div>
 					</div>
