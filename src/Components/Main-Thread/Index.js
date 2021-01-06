@@ -57,7 +57,7 @@ const Index = (props) => {
 				<div ref={messagesEndRef} />
 			</div>
 			<div className='your-comment'>
-				<img src={URL_SERVER + '/image/' + img} alt='' />
+				<img src={img} alt='' />
 				<input
 					type='text'
 					placeholder='#Comment'

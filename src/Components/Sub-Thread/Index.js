@@ -24,7 +24,7 @@ const Index = (props) => {
 	return (
 		<div class='post post-right'>
 			<div class='image-tab'>
-				<img src={URL_SERVER + '/image/' + img} alt='' />
+				<img src={img} alt='' />
 			</div>
 			<div class='content-tab'>
 				<div class='status-content'>

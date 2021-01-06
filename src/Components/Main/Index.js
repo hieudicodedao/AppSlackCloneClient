@@ -26,6 +26,7 @@ import {
 	GET_LIST_REPLY,
 	ADD_REPLY,
 	PUSH_REPLY_TO_TOPIC,
+	UPLOAD_TO_CLOUD,
 } from '../../Config/Index'
 import { FETCH_POST, FETCH_GET } from '../../API/index'
 //
@@ -166,17 +167,42 @@ const Index = (props) => {
 			})
 		setChanel_name('')
 	}
-	const handleAddPost = async () => {
+	const handleAddPost = async (attachImageUrl) => {
 		if (!current_channel) {
 			setIsAddSuccess(false)
 			setOpenSnack(true)
 			return
 		}
 		setOpenBackDrop(true)
+		let list_image = null
+		await FETCH_POST(UPLOAD_TO_CLOUD, {
+			image: attachImageUrl,
+		})
+			.then((res) => res.json())
+			.then((rs) => {
+				if (rs.list_image) {
+					list_image = rs.list_image
+					return
+				}
+				if (rs.err) {
+					setOpenBackDrop(false)
+					setIsAddSuccess(false)
+					setOpenSnack(true)
+					return
+				}
+			})
+			.catch((err) => {
+				console.log(err)
+				setOpenBackDrop(false)
+				setIsAddSuccess(false)
+				setOpenSnack(true)
+			})
+		if (list_image === null) return
 		await FETCH_POST(CREATE_TOPIC, {
 			user: username,
 			channel: current_channel,
 			content: topic_content !== '' ? topic_content : topic_content_2,
+			list_image,
 		})
 			.then((res) => {
 				setOpenBackDrop(false)
@@ -184,6 +210,7 @@ const Index = (props) => {
 			})
 			.then((rs) => {
 				if (rs.newTopic) {
+					console.log(rs.newTopic)
 					const send_topic = rs.newTopic
 					socket.emit('add-topic', send_topic)
 					setIsAddSuccess(true)
@@ -356,6 +383,9 @@ const Index = (props) => {
 								topic_content_2={topic_content_2}
 								setTopic_content_2={setTopic_content_2}
 								handleAddPost={handleAddPost}
+								setOpenBackDrop={setOpenBackDrop}
+								setOpenSnack={setOpenSnack}
+								setIsAddSuccess={setIsAddSuccess}
 							/>
 							<Thread
 								username={username}

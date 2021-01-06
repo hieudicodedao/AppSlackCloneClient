@@ -9,7 +9,13 @@ const Index = (props) => {
 	const { topic, handleClickTopic } = props
 	const [img, setImg] = useState('')
 	const [listReplyImg, setListReplyImg] = useState([])
-	console.log(topic.date)
+	useEffect(() => {
+		loadImage()
+	}, [])
+
+	useEffect(() => {
+		loadImgDate()
+	}, [])
 	const loadImage = useCallback(async () => {
 		await FETCH_POST(GET_IMAGE, { username: topic.user })
 			.then((res) => res.json())
@@ -35,18 +41,19 @@ const Index = (props) => {
 				console.log(err)
 			})
 	}
-	useEffect(() => {
-		loadImage()
-	}, [])
-
-	useEffect(() => {
-		loadImgDate()
-	}, [])
-
+	const display_sent_image = () => {
+		return topic.image.map((ele) => {
+			return (
+				<div className='image-sent-item'>
+					<img src={ele} alt='' />
+				</div>
+			)
+		})
+	}
 	return (
 		<div class='post post-left'>
 			<div class='image-tab'>
-				<img src={URL_SERVER + '/image/' + img} alt='' />
+				<img src={img} alt='' />
 			</div>
 			<div class='content-tab'>
 				<div class='status-content'>
@@ -55,17 +62,13 @@ const Index = (props) => {
 				</div>
 				<div class='user-content'>
 					<span class='text'>{topic.content}</span>
+					<div className='image-sent'>{display_sent_image()}</div>
 				</div>
 				{topic.reply.length > 0 ? (
 					<div class='response'>
 						<AvatarGroup max={4}>
 							{listReplyImg.map((ele) => {
-								return (
-									<Avatar
-										alt='Remy Sharp'
-										src={URL_SERVER + '/image/' + ele.img}
-									/>
-								)
+								return <Avatar alt='Remy Sharp' src={ele.img} />
 							})}
 						</AvatarGroup>
 						<a
