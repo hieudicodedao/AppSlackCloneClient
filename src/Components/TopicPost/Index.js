@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useCallback } from 'react'
 import Avatar from '@material-ui/core/Avatar'
 import AvatarGroup from '@material-ui/lab/AvatarGroup'
-import { URL_SERVER } from '../../Config/Index'
+
 import { FETCH_POST } from '../../API/index'
 import { GET_IMAGE, GET_REPLY_INFO } from '../../Config/Index'
 import { showDate } from '../../Config/refractorDate'
@@ -51,21 +51,21 @@ const Index = (props) => {
 		})
 	}
 	return (
-		<div class='post post-left'>
-			<div class='image-tab'>
+		<div className='post post-left'>
+			<div className='image-tab'>
 				<img src={img} alt='' />
 			</div>
-			<div class='content-tab'>
-				<div class='status-content'>
-					<p class='user-name'>{topic.user}</p>
-					<span class='time-sent'>{showDate(topic.date)}</span>
+			<div className='content-tab'>
+				<div className='status-content'>
+					<p className='user-name'>{topic.user}</p>
+					<span className='time-sent'>{showDate(topic.date)}</span>
 				</div>
-				<div class='user-content'>
-					<span class='text'>{topic.content}</span>
+				<div className='user-content'>
+					<span className='text'>{topic.content}</span>
 					<div className='image-sent'>{display_sent_image()}</div>
 				</div>
 				{topic.reply.length > 0 ? (
-					<div class='response'>
+					<div className='response'>
 						<AvatarGroup max={4}>
 							{listReplyImg.map((ele) => {
 								return <Avatar alt='Remy Sharp' src={ele.img} />
@@ -79,7 +79,7 @@ const Index = (props) => {
 							{' '}
 							{topic.reply.length} replies
 						</a>
-						<div class='last-reply'>
+						<div className='last-reply'>
 							{listReplyImg.length === 0 ? (
 								<span>No reply recored </span>
 							) : (

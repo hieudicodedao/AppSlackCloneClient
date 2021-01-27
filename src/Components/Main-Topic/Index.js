@@ -93,9 +93,10 @@ const Index = (props) => {
 				}
 			>
 				<div className='old-topic'>
-					{listtopic.map((topic) => {
+					{listtopic.map((topic, index) => {
 						return (
 							<TopicPost
+								key={index}
 								topic={topic}
 								handleClickTopic={handleClickTopic}
 							/>
@@ -139,7 +140,7 @@ const Index = (props) => {
 								}}
 							></i>
 							<label htmlFor='attach-file'>
-								<i class='fas fa-paperclip' type='file'></i>
+								<i className='fas fa-paperclip' type='file'></i>
 							</label>
 							<input
 								type='file'

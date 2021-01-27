@@ -8,8 +8,8 @@ import { CREATE_USER, UPLOAD_IMAGE, IS_EXIST_USER } from '../../Config/Index'
 import { FETCH_POST } from '../../API/index'
 //
 import { Link, useHistory } from 'react-router-dom'
-import '../../css/main.css'
-import '../../css/util.css'
+import '../../public/css/main.css'
+import '../../public/css/util.css'
 
 const useStyles = makeStyles((theme) => ({
 	backdrop: {

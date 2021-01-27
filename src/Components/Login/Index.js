@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 
 //material ui
@@ -9,8 +9,8 @@ import { makeStyles } from '@material-ui/core/styles'
 import { FETCH_POST } from '../../API/index'
 import { CHECK_USER } from '../../Config/Index'
 //
-import '../../css/main.css'
-import '../../css/util.css'
+import '../../public/css/main.css'
+import '../../public/css/util.css'
 const useStyles = makeStyles((theme) => ({
 	backdrop: {
 		zIndex: theme.zIndex.drawer + 1,

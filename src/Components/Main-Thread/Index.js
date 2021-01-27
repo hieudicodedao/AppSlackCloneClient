@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
 import SubThread from '../Sub-Thread/Index'
-import { URL_SERVER } from '../../Config/Index'
 import { FETCH_POST } from '../../API/index'
 import { GET_IMAGE } from '../../Config/Index'
 const Index = (props) => {
@@ -34,7 +33,7 @@ const Index = (props) => {
 	useEffect(scrollToBottom, [listreply])
 	useEffect(() => {
 		loadImage()
-	}, [])
+	})
 	return (
 		<div
 			className={
@@ -51,8 +50,8 @@ const Index = (props) => {
 				</div>
 			</div>
 			<div className='down-right-post'>
-				{listreply.map((reply) => {
-					return <SubThread reply={reply} />
+				{listreply.map((reply, index) => {
+					return <SubThread reply={reply} key={index} />
 				})}
 				<div ref={messagesEndRef} />
 			</div>

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { URL_SERVER } from '../../Config/Index'
 import { FETCH_POST } from '../../API/index'
 import { GET_IMAGE } from '../../Config/Index'
 import { showDate } from '../../Config/refractorDate'
@@ -22,17 +21,17 @@ const Index = (props) => {
 		loadImage()
 	}, [])
 	return (
-		<div class='post post-right'>
-			<div class='image-tab'>
+		<div className='post post-right'>
+			<div className='image-tab'>
 				<img src={img} alt='' />
 			</div>
-			<div class='content-tab'>
-				<div class='status-content'>
-					<p class='user-name'>{reply.user}</p>
-					<span class='time-sent'>{showDate(reply.date)}</span>
+			<div className='content-tab'>
+				<div className='status-content'>
+					<p className='user-name'>{reply.user}</p>
+					<span className='time-sent'>{showDate(reply.date)}</span>
 				</div>
-				<div class='user-content'>
-					<span class='text'>{reply.content}</span>
+				<div className='user-content'>
+					<span className='text'>{reply.content}</span>
 				</div>
 			</div>
 		</div>

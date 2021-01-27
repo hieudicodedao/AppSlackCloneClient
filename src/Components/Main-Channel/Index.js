@@ -4,12 +4,12 @@ import SubChannel from '../Sub-Channel/Index'
 const Index = (props) => {
 	const { handleClickOpen, listchannel, handleJoinChannel } = props
 	return (
-		<div class='chanel'>
-			<div class='chanel-add' onClick={() => handleClickOpen()}>
+		<div className='chanel'>
+			<div className='chanel-add' onClick={() => handleClickOpen()}>
 				<span>Channel</span>
-				<i class='fas fa-plus-circle'></i>
+				<i className='fas fa-plus-circle'></i>
 			</div>
-			<div class='chanel-name-list'>
+			<div className='chanel-name-list'>
 				{listchannel.map((channel) => (
 					<SubChannel
 						channelName={channel.name}

@@ -9,7 +9,7 @@ const Index = (props) => {
 			onClick={() => handleJoinChannel(channelName)}
 		>
 			<span># </span>
-			<span class='chanel-name'>{channelName}</span>
+			<span className='chanel-name'>{channelName}</span>
 		</a>
 	)
 }
