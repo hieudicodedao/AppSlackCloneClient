@@ -112,7 +112,7 @@ const Index = (props) => {
 		socket.on('some-one-add-topic', (send_topic) => {
 			setListtopic([...listtopic, send_topic])
 		})
-	}, [listtopic])
+	}, [listtopic]) 
 	useEffect(() => {
 		socket.on('some-one-add-reply', (newReply) => {
 			setListreply([...listreply, newReply])
