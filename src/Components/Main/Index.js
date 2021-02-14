@@ -105,31 +105,36 @@ const Index = (props) => {
 	}, [])
 	useEffect(() => {
 		socket.on('some-one-add-channel', (newChannel) => {
-			setListchannel([...listchannel, newChannel])
+			// setListchannel([...listchannel, newChannel])
+
+			setListchannel((state) => [...state, newChannel])
 		})
-	}, [listchannel])
+	}, [])
 	useEffect(() => {
 		socket.on('some-one-add-topic', (send_topic) => {
-			setListtopic([...listtopic, send_topic])
+			setListtopic((state) => [...state, send_topic])
 		})
-	}, [listtopic]) 
+	}, [])
 	useEffect(() => {
 		socket.on('some-one-add-reply', (newReply) => {
-			setListreply([...listreply, newReply])
+			setListreply((state) => [...state, newReply])
 		})
-	}, [listreply])
+	}, [])
 	useEffect(() => {
 		socket.on('some-one-update-reply-array', ({ newReply, _id_topic }) => {
 			let newlisttopic = []
-			listtopic.map((topic) => {
-				if (topic._id === _id_topic) {
-					topic.reply = newReply
+			setListtopic((state) => {
+				for (let i = 0; i < state.length; ++i) {
+					let topic = state[i]
+					if (topic._id === _id_topic) {
+						topic.reply = newReply
+					}
+					newlisttopic.push(topic)
 				}
-				return newlisttopic.push(topic)
+				return newlisttopic
 			})
-			setListtopic(newlisttopic)
 		})
-	}, [listtopic, idtopic])
+	}, [])
 	//
 
 	const handleAddChanel = async () => {
@@ -143,17 +148,12 @@ const Index = (props) => {
 			.then(
 				(rs) => {
 					if (rs.success) {
-						let newChannel = {
-							name: channel_name,
-							isJoin: false,
-						}
-						socket.emit('add-channel', newChannel)
-						setIsAddSuccess(true)
+						// setIsAddSuccess(true)
 					}
 					if (rs.err) {
 						setIsAddSuccess(false)
 					}
-					setOpenSnack(true)
+					// setOpenSnack(true)
 				},
 				(err) => {
 					setIsAddSuccess(false)
@@ -210,11 +210,8 @@ const Index = (props) => {
 			})
 			.then((rs) => {
 				if (rs.newTopic) {
-					console.log(rs.newTopic)
-					const send_topic = rs.newTopic
-					socket.emit('add-topic', send_topic)
-					setIsAddSuccess(true)
-					setOpenSnack(true)
+					// setIsAddSuccess(true)
+					// setOpenSnack(true)
 				}
 				if (rs.err) {
 					setIsAddSuccess(false)
@@ -316,9 +313,6 @@ const Index = (props) => {
 			.then((rs) => {
 				if (rs.newReply) {
 					id_reply = rs.newReply._id
-					const { newReply } = rs
-					socket.emit('add-reply', newReply)
-
 					setIsAddSuccess(true)
 					setOpenSnack(true)
 				}
@@ -340,11 +334,11 @@ const Index = (props) => {
 			})
 				.then((res) => res.json())
 				.then((rs) => {
-					let newReply = rs.reply
-					socket.emit('update-reply-array', {
-						newReply,
-						_id_topic: idtopic,
-					})
+					// let newReply = rs.reply
+					// socket.emit('update-reply-array', {
+					// 	newReply,
+					// 	_id_topic: idtopic,
+					// })
 				})
 				.catch((error) => {
 					console.log(error)
