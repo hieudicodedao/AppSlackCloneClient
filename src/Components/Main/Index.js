@@ -124,6 +124,7 @@ const Index = (props) => {
 		socket.on('some-one-update-reply-array', ({ newReply, _id_topic }) => {
 			let newlisttopic = []
 			setListtopic((state) => {
+				console.log(state)
 				for (let i = 0; i < state.length; ++i) {
 					let topic = state[i]
 					if (topic._id === _id_topic) {
@@ -131,6 +132,7 @@ const Index = (props) => {
 					}
 					newlisttopic.push(topic)
 				}
+				console.log(newlisttopic)
 				return newlisttopic
 			})
 		})
@@ -256,12 +258,12 @@ const Index = (props) => {
 			}
 		}
 		setListchannel(fakeListChannel)
-		setOpenBackDrop(true)
+		// setOpenBackDrop(true)
 		setListtopic([])
 		//load data post
 		await FETCH_POST(GET_LIST_TOPIC, { channelName })
 			.then((res) => {
-				setOpenBackDrop(false)
+				// setOpenBackDrop(false)
 				return res.json()
 			})
 			.then((rs) => {
@@ -279,10 +281,10 @@ const Index = (props) => {
 			socket.emit('leave-topic', idtopic)
 		}
 		setCurrent_topic(_id_topic)
-		setOpenBackDrop(true)
+		// setOpenBackDrop(true)
 		await FETCH_POST(GET_LIST_REPLY, { _id_topic })
 			.then((res) => {
-				setOpenBackDrop(false)
+				// setOpenBackDrop(false)
 				return res.json()
 			})
 			.then((rs) => {
@@ -298,7 +300,7 @@ const Index = (props) => {
 			})
 	}
 	const handleAddReply = async () => {
-		setOpenBackDrop(true)
+		// setOpenBackDrop(true)
 		// add reply
 		let id_reply = null
 		await FETCH_POST(ADD_REPLY, {
@@ -307,14 +309,14 @@ const Index = (props) => {
 			content: reply_content,
 		})
 			.then((res) => {
-				setOpenBackDrop(false)
+				// setOpenBackDrop(false)
 				return res.json()
 			})
 			.then((rs) => {
 				if (rs.newReply) {
 					id_reply = rs.newReply._id
-					setIsAddSuccess(true)
-					setOpenSnack(true)
+					// setIsAddSuccess(true)
+					// setOpenSnack(true)
 				}
 				if (rs.err) {
 					setIsAddSuccess(false)
